@@ -2,7 +2,8 @@ require('dotenv').config();
     const express = require('express');
     const expressLayouts = require('express-ejs-layouts');
     const methodOverride = require('method-override');
-    const {flash} = require('express-flash-message');
+    const flash = require('express-flash');
+    // const {flash} = require('express-flash-message');
     const session = require('express-session');
     const connectdb = require('./server/config/db');
 
@@ -29,9 +30,16 @@ app.use(
       }
     })
   );
+
+  app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true
+  }));
+  app.use(flash());
   
   // Flash Messages
-  app.use(flash({ sessionKeyName: 'flashMessage' }));
+  // app.use(flash({ sessionKeyName: 'flashMessage' }));
 
     app.use(expressLayouts);
     
@@ -40,11 +48,23 @@ app.use(
     
     
     // Routes
-    app.use('/index',require('./server/routes/routes'));
+    app.use('/',require('./server/routes/routes'));
     
+   // Your login verification logic
+async function verifyLogin(email, password) {
+  try {
+    const user = await User.findOne({ email });
 
-    
-
+    if (user && user.password === password) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error('Error during login verification:', error);
+    return false;
+  }
+}
   
     
     // 404 Page

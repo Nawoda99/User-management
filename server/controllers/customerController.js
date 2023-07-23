@@ -7,54 +7,37 @@ const mongoose = require('mongoose');
  * Get Home page
  
  */
-// exports.homepage = async(req, res) => {
+exports.homepage = async(req, res) => {
     
-//   const messages = await req.consumeFlash('info');
+  // const messages = await req.consumeFlash('info');
   
-//     const locals = {
-//         title: 'UMS',
-//         description: 'User Management System'
-//     }
-     
-//     let perPage = 15;
-//     let page = req.query.page || 1;
-
-//     try {
-//       const customers = await Customer.aggregate([ { $sort: { createdAt: -1 } } ])
-//         .skip(perPage * page - perPage)
-//         .limit(perPage)
-//         .exec(); 
-//       const count = await Customer.count();
-
-//       res.render('index', {
-//         locals,
-//         customers,
-//         current: page,
-//         pages: Math.ceil(count / perPage),
-//         messages
-//       });
-
-//     } catch (error) {
-//       console.log(error);
-//     }
-// }
-exports.homepage = async (req, res) => {
-    const messages = await req.consumeFlash('info');
     const locals = {
-      title: 'NodeJs',
-      description: 'Free NodeJs User Management System'
+        title: 'UMS',
+        description: 'User Management System'
     }
+     
+    let perPage = 15;
+    let page = req.query.page || 1;
 
     try {
-      const customers = await Customer.find({}).limit(22);
-      res.render('index', { locals, messages, customers } );
+      const customers = await Customer.aggregate([ { $sort: { createdAt: -1 } } ])
+        .skip(perPage * page - perPage)
+        .limit(perPage)
+        .exec(); 
+      const count = await Customer.count();
+
+      res.render('index', {
+        locals,
+        customers,
+        current: page,
+        pages: Math.ceil(count / perPage),
+        
+      });
+
     } catch (error) {
       console.log(error);
     }
 }
-
-
-
 
 /**
  * GET /
@@ -179,7 +162,7 @@ exports.edit = async (req, res) => {
  * Update Customer Data 
 */
 exports.editPost = async (req, res) => {
-  const messages = await req.consumeFlash('info');
+  // const messages = await req.consumeFlash('info');
   try {
     await Customer.findByIdAndUpdate(req.params.id,{
       firstName: req.body.firstName,
