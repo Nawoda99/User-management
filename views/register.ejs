@@ -1,0 +1,75 @@
+<div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+  <div class="row gx-lg-5 align-items-center mb-5">
+    <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+      <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+        Welcome to <br />
+        <span style="color: hsl(218, 81%, 75%)">Nawo</span>
+      </h1>
+      <p class="mb-4 opacity-70" style="color: hsl(218, 11%, 40%)">
+        The user management system's login page is a secure gateway that allows registered users to access their
+        accounts using unique credentials, like an email and password. It ensures data privacy and system security,
+        allowing only authorized individuals to access personalized features and functionalities.
+      </p>
+    </div>
+
+    <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+      <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+      <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+      <div class="card bg-glass">
+        <div class="card-body px-4 py-5 px-md-5">
+          <form action="/register" method="POST">
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+
+              <h1 class="mb-3 h3">Register</h1>
+
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" name="firstName" id="form3Example2" class="form-control"
+                    placeholder="First Name" />
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" name="lastName" id="form3Example3" class="form-control" placeholder="Last Name" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" name="email" id="form3Example4" class="form-control" placeholder="Email address" />
+            </div>
+
+            <!-- Telephone input -->
+            <div class="form-outline mb-4">
+              <input type="tel" name="tel" id="form3Example5" class="form-control" placeholder="Telephone number" />
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" name="password" id="form3Example6" class="form-control" placeholder="Password" />
+            </div>
+
+            <!-- Confirm Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" name="confirmPassword" id="form3Example7" class="form-control"
+                placeholder="Confirm Password" />
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              Sign up
+            </button>
+
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p>Already have an account? <a href="/log">Login</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

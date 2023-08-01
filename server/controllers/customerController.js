@@ -16,7 +16,7 @@ exports.homepage = async(req, res) => {
         description: 'User Management System'
     }
      
-    let perPage = 15;
+    let perPage = 10;
     let page = req.query.page || 1;
 
     try {
@@ -91,7 +91,7 @@ exports.postCustomer = async (req, res) => {
 
   try {
     await Customer.create(newCustomer);
-    await req.flash("info", "New customer has been added.");
+    req.flash('success', 'Customer Details Added successful !!');
 
     res.redirect("/");
   } catch (error) {
@@ -147,6 +147,8 @@ exports.edit = async (req, res) => {
       locals,
       customer
     })
+    req.flash('success', 'Customer Details Added successful !!');
+   
 
   } catch (error) {
     console.log(error);
@@ -173,7 +175,8 @@ exports.editPost = async (req, res) => {
       updatedAt: Date.now()
     });
     await res.redirect(`/edit/${req.params.id}`);
-    await req.flash("info", "Customer Details has been Updated.");
+    req.flash('success', 'Registration successful! You can now log in.');
+    
     
     console.log('redirected');
     
@@ -190,8 +193,8 @@ exports.editPost = async (req, res) => {
 exports.deleteCustomer = async (req, res) => {
   try {
     await Customer.deleteOne({ _id: req.params.id });
-    await req.flash("info", "Customer Details has been Deleted.");
-    res.redirect("/")
+    req.flash('success', 'Customer Details Deleted !!');
+    res.redirect("/");
   } catch (error) {
     console.log(error);
   }

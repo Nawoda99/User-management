@@ -52,7 +52,7 @@ exports.employee = async(req, res) => {
 exports.log= async (req, res) => {
   
   const locals = {
-    title: 'About',
+    title: 'Login',
     description: 'User Management System'
   }
 
@@ -66,7 +66,7 @@ exports.log= async (req, res) => {
 
 exports.register= async (req, res) => {
   const locals = {
-    title: 'About',
+    title: 'Register',
     description: 'User Management System'
   }
 
@@ -156,38 +156,7 @@ exports.loging = async (req, res) => {
 };
 
 
-exports.homepage = async(req, res) => {
 
- 
-    const locals = {
-        title: 'UMS',
-        description: 'User Management System'
-    }
-     
-    let perPage = 15;
-    let page = req.query.page || 1;
-
-    try {
-        const customers = await Customer.aggregate([ { $sort: { createdAt: -1 } } ])
-        .skip(perPage * page - perPage)
-        .limit(perPage)
-        .exec(); 
-      const count = await Customer.count();
-
-      res.render('index', {
-        locals,
-        customers,
-        current: page,
-        pages: Math.ceil(count / perPage),
-        messages
-        
-      });
-      
-
-    } catch (error) {
-      console.log(error);
-    }
-}
 
 exports.about = async (req, res) => {
     const locals = {
@@ -251,3 +220,37 @@ exports.show= async (req, res) => {
 //   }
 
 // }
+
+
+exports.homepage = async(req, res) => {
+
+ 
+  const locals = {
+      title: 'UMS',
+      description: 'User Management System'
+  }
+   
+  let perPage = 15;
+  let page = req.query.page || 1;
+
+  try {
+      const customers = await Customer.aggregate([ { $sort: { createdAt: -1 } } ])
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .exec(); 
+    const count = await Customer.count();
+
+    res.render('index', {
+      locals,
+      customers,
+      current: page,
+      pages: Math.ceil(count / perPage),
+      messages
+      
+    });
+    
+
+  } catch (error) {
+    console.log(error);
+  }
+}
